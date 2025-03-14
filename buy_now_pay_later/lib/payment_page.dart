@@ -5,7 +5,7 @@ class PaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // White background
+      backgroundColor: Colors.white, // White background for a clean look
       appBar: AppBar(
         title: Text('Payment', style: TextStyle(color: Colors.black)),
         backgroundColor: Colors.transparent,
@@ -17,35 +17,35 @@ class PaymentPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Payment Information
+            // Payment Information Card
             Card(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-              elevation: 10,
-              shadowColor: Colors.grey.withOpacity(0.3), // Subtle shadow effect
-              color: Colors.white, // White background for the card
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              elevation: 15,
+              shadowColor: Colors.grey.withOpacity(0.3),
+              color: Colors.white,
               child: Padding(
-                padding: EdgeInsets.all(16),
+                padding: EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "Order Details",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
                     ),
-                    SizedBox(height: 10),
-                    Text("Item: Premium Subscription", style: TextStyle(color: Colors.grey[700])),
-                    Text("Validity: 1 Year", style: TextStyle(color: Colors.grey[700])),
-                    Text("Price: \$7.61", style: TextStyle(color: Colors.grey[700])),
-                    SizedBox(height: 10),
+                    SizedBox(height: 15),
+                    _buildInfoRow("Item", "Premium Subscription"),
+                    _buildInfoRow("Validity", "1 Year"),
+                    _buildInfoRow("Price", "\$7.61"),
+                    SizedBox(height: 20),
                     Divider(color: Colors.grey[300]),
                     Text(
                       "Enter Payment Details",
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
                     ),
-                    SizedBox(height: 10),
-                    _buildTextField("Merchant Account"),
-                    _buildTextField("Amount"),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
+                    _buildTextField("Merchant Account", Icons.account_balance),
+                    _buildTextField("Amount", Icons.attach_money),
+                    SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -57,20 +57,34 @@ class PaymentPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 30),
+            // Confirm Payment Button
             Center(
-              child: ElevatedButton(
-                onPressed: () {
+              child: GestureDetector(
+                onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) => PaymentSummaryPage()));
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFFFF9800), // Orange button
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  shadowColor: Colors.grey.withOpacity(0.3),
-                  elevation: 5,
+                child: Container(
+                  width: 200,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFFE67026), Color(0xFFE87026)], // Your platform's color (secondary)
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(color: Colors.grey.withOpacity(0.2), spreadRadius: 2, blurRadius: 8, offset: Offset(0, 4)),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Confirm Payment",
+                      style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
-                child: Text("Confirm Payment", style: TextStyle(fontSize: 18, color: Colors.white)),
               ),
             ),
           ],
@@ -79,18 +93,46 @@ class PaymentPage extends StatelessWidget {
     );
   }
 
-  // Helper method for building a custom text field
-  Widget _buildTextField(String labelText) {
+
+  // Helper method for building text field with icons
+  Widget _buildTextField(String labelText, IconData icon) {
     return TextField(
       decoration: InputDecoration(
+        prefixIcon: Icon(icon, color: Color(0xFFE67026)), // Use platform color for the icon
         labelText: labelText,
+        labelStyle: TextStyle(color: Colors.black.withOpacity(0.7)),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide(color: Colors.grey.withOpacity(0.3)),
         ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15),
+          borderSide: BorderSide(color: Color(0xFFE67026)), // Highlight with platform color
+        ),
         filled: true,
-        fillColor: Colors.grey[100], // Light gray background for text fields
-        contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        fillColor: Colors.grey[100],
+        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+      ),
+      style: TextStyle(color: Colors.black),
+    );
+  }
+
+  // Helper method for creating rows for Order Details
+  Widget _buildInfoRow(String label, String value) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        children: [
+          Text(
+            label,
+            style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+          ),
+          Spacer(),
+          Text(
+            value,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFE67026)), // Platform color
+          ),
+        ],
       ),
     );
   }

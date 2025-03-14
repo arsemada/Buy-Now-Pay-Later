@@ -3,11 +3,11 @@ import 'payment_page.dart';
 
 class ProductSelectionPage extends StatelessWidget {
   final List<Map<String, String>> products = [
-    {'name': 'Household', 'image': 'assets/household.png'},
-    {'name': 'Groceries', 'image': 'assets/groceries.png'},
-    {'name': 'Electronics', 'image': 'assets/electronics.png'},
-    {'name': 'Machinery', 'image': 'assets/machinery.png'},
-    {'name': 'Agro Products', 'image': 'assets/agro_products.png'},
+    {'name': 'Household', 'image': 'assets/household.jpg'},
+    {'name': 'Groceries', 'image': 'assets/groceries.jpg'},
+    {'name': 'Electronics', 'image': 'assets/electronics.jpg'},
+    {'name': 'Machinery', 'image': 'assets/machinery.jpg'},
+    {'name': 'Agro Products', 'image': 'assets/agro_products.jpg'},
   ];
 
   @override

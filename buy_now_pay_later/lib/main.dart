@@ -10,6 +10,7 @@ class BNPLApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BNPL App',
+      debugShowCheckedModeBanner: false, // Disable the debug banner
       theme: ThemeData(
         primaryColor: Color(0xFF00C2FF),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Color(0xFFE67026)),
